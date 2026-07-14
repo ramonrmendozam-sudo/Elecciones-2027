@@ -3,193 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuenta Regresiva - Elecciones Poder Judicial 2027</title>
+    <title>Cuenta Regresiva - Elecciones México 2027</title>
     <style>
-        /* Estilos generales y fondo morado */
         body {
-            font-family: 'Arial Black', 'Helvetica Neue', Arial, sans-serif;
-            background-color: #7B1FA2; /* Color morado de la imagen */
-            color: #ffffff;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             margin: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
         }
-
-        .countdown-container {
+        h1 {
+            color: #6200ee;
+            font-size: 2rem;
             text-align: center;
-            padding: 20px;
-            max-width: 90%;
-            box-sizing: border-box;
         }
-
-        /* Texto superior "Faltan" */
-        .text-top {
-            font-size: 2.2rem;
-            font-weight: 900;
-            margin-bottom: 20px;
-            letter-spacing: 0.5px;
-        }
-
-        /* Contenedor de la cuadrícula de tiempo */
-        .countdown-grid {
+        #countdown {
             display: flex;
-            flex-wrap: wrap;
             gap: 20px;
-            justify-content: center;
-            margin-bottom: 25px;
+            margin-top: 20px;
         }
-
-        /* Grupo que une la tarjeta del número con la etiqueta */
-        .time-group {
-            display: flex;
-            gap: 8px; /* Separación entre el número y el texto */
-        }
-
-        /* Estilo base para las tarjetas negras de la imagen */
-        .card {
-            background-color: #1c1c1c; /* Negro mate */
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            height: 90px;
-            box-sizing: border-box;
-        }
-
-        /* Tarjeta para los números */
-        .card-num {
-            font-size: 2.8rem;
-            font-weight: 900;
+        .time-box {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
             min-width: 80px;
-            padding: 0 10px;
         }
-
-        /* Tarjeta para las etiquetas (DÍAS, HORAS, etc.) */
-        .card-label {
-            font-size: 1.6rem;
-            font-weight: 900;
-            min-width: 120px;
-            padding: 0 15px;
-            letter-spacing: 1px;
+        .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
         }
-
-        /* Texto medio "para las elecciones del" */
-        .text-middle {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            letter-spacing: 0.5px;
-        }
-
-        /* Texto inferior "PODER JUDICIAL" */
-        .text-bottom {
-            font-size: 2.8rem;
-            font-weight: 900;
+        .label {
+            font-size: 0.9rem;
+            color: #777;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            line-height: 1.1;
-        }
-
-        /* Ajustes responsivos para pantallas móviles */
-        @media (max-width: 600px) {
-            .card {
-                height: 70px;
-            }
-            .card-num {
-                font-size: 2rem;
-                min-width: 60px;
-            }
-            .card-label {
-                font-size: 1.1rem;
-                min-width: 90px;
-            }
-            .text-top {
-                font-size: 1.8rem;
-            }
-            .text-middle {
-                font-size: 1.1rem;
-            }
-            .text-bottom {
-                font-size: 2rem;
-            }
         }
     </style>
 </head>
 <body>
 
-    <div class="countdown-container">
-        <!-- Texto superior -->
-        <div class="text-top">Faltan</div>
-        
-        <!-- Cuadrícula con las tarjetas estilo flip-clock/fichas -->
-        <div class="countdown-grid">
-            <!-- Días -->
-            <div class="time-group">
-                <div class="card card-num" id="days-val">00</div>
-                <div class="card card-label">DÍAS</div>
-            </div>
-            <!-- Horas -->
-            <div class="time-group">
-                <div class="card card-num" id="hours-val">00</div>
-                <div class="card card-label">HORAS</div>
-            </div>
-            <!-- Minutos -->
-            <div class="time-group">
-                <div class="card card-num" id="minutes-val">00</div>
-                <div class="card card-label">MINS</div>
-            </div>
-            <!-- Segundos -->
-            <div class="time-group">
-                <div class="card card-num" id="seconds-val">00</div>
-                <div class="card card-label">SEGS</div>
-            </div>
+    <h1>Cuenta regresiva para la Jornada Electoral en México<br><small style="font-size: 1.2rem; color: #555;">6 de junio de 2027</small></h1>
+    
+    <div id="countdown">
+        <div class="time-box">
+            <div class="number" id="days">00</div>
+            <div class="label">Días</div>
         </div>
-        
-        <!-- Textos inferiores -->
-        <div class="text-middle">para las elecciones del</div>
-        <div class="text-bottom">PODER JUDICIAL</div>
+        <div class="time-box">
+            <div class="number" id="hours">00</div>
+            <div class="label">Horas</div>
+        </div>
+        <div class="time-box">
+            <div class="number" id="minutes">00</div>
+            <div class="label">Minutos</div>
+        </div>
+        <div class="time-box">
+            <div class="number" id="seconds">00</div>
+            <div class="label">Segundos</div>
+        </div>
     </div>
 
     <script>
-        (function() {
-            // Fecha objetivo: 6 de junio de 2027 a las 08:00 AM (Apertura de casillas)
-            const targetDate = new Date("June 6, 2027 08:00:00").getTime();
+        // Fecha objetivo: 6 de junio de 2027 a las 08:00 AM (Apertura de casillas)
+        const targetDate = new Date("June 6, 2027 08:00:00").getTime();
 
-            const updateCountdown = setInterval(function() {
-                const now = new Date().getTime();
-                const difference = targetDate - now;
+        const updateCountdown = setInterval(function() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
 
-                const daysEl = document.getElementById("days-val");
-                const hoursEl = document.getElementById("hours-val");
-                const minutesEl = document.getElementById("minutes-val");
-                const secondsEl = document.getElementById("seconds-val");
+            if (difference < 0) {
+                clearInterval(updateCountdown);
+                document.getElementById("countdown").innerHTML = "<h2>¡La jornada electoral ha comenzado!</h2>";
+                return;
+            }
 
-                if (!daysEl) {
-                    clearInterval(updateCountdown);
-                    return;
-                }
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-                if (difference < 0) {
-                    clearInterval(updateCountdown);
-                    document.querySelector(".countdown-container").innerHTML = 
-                        "<div class='text-bottom'>¡LA JORNADA ELECTORAL HA COMENZADO!</div>";
-                    return;
-                }
-
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                daysEl.innerText = days;
-                hoursEl.innerText = hours < 10 ? "0" + hours : hours;
-                minutesEl.innerText = minutes < 10 ? "0" + minutes : minutes;
-                secondsEl.innerText = seconds < 10 ? "0" + seconds : seconds;
-            }, 1000);
-        })();
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+        }, 1000);
     </script>
 </body>
 </html>
