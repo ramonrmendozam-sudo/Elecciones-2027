@@ -28,18 +28,32 @@
             padding: 10px;
         }
 
-        /* Contenedor principal - ampliado para alojar tarjetas más grandes */
+        /* Contenedor principal con recorte para la imagen superior */
         .main-card {
             background: #ffffff;
             border-radius: 24px;
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
-            padding: 45px 50px;
-            max-width: 800px; /* Escalado para el nuevo tamaño */
+            max-width: 800px;
             width: 100%;
             text-align: center;
+            overflow: hidden; /* Asegura que la imagen respete las esquinas redondeadas */
         }
 
-        /* Título aumentado un 50% (de 1.8rem a 2.7rem) */
+        /* Estilos del banner superior */
+        .banner-img {
+            width: 100%;
+            height: auto;
+            max-height: 180px; /* Limita la altura máxima del banner */
+            object-fit: cover; /* Evita que la imagen se deforme */
+            display: block;
+        }
+
+        /* Contenedor del contenido inferior */
+        .content-wrapper {
+            padding: 40px 50px 45px 50px; /* Relleno interior para el texto y las tarjetas */
+        }
+
+        /* Título aumentado un 50% */
         .title {
             color: #002d62;
             font-size: 2.7rem;
@@ -56,11 +70,11 @@
             gap: 16px;
         }
 
-        /* Fichas contenedoras - escaladas en tamaño */
+        /* Fichas contenedoras */
         .time-card {
             background: linear-gradient(to bottom, #ffffff 0%, #e9ecef 100%);
             border-radius: 24px;
-            width: 165px; /* Escalado de 115px a 165px */
+            width: 165px;
             padding: 12px;
             display: flex;
             flex-direction: column;
@@ -68,9 +82,9 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
 
-        /* Caja interna de números aumentada un 50% en tamaño de texto (de 2.3rem a 3.45rem) */
+        /* Caja interna de números aumentada un 50% */
         .num-box {
-            height: 125px; /* Escalado de 85px a 125px */
+            height: 125px;
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -92,7 +106,7 @@
             color: #c2006d;
         }
 
-        /* Etiquetas inferiores aumentadas un 50% (de 1.1rem a 1.65rem) */
+        /* Etiquetas inferiores aumentadas un 50% */
         .label-box {
             font-size: 1.65rem;
             font-weight: 600;
@@ -101,13 +115,13 @@
             text-align: center;
         }
 
-        /* Responsividad adaptada para pantallas medianas y móviles */
+        /* Responsividad adaptada para pantallas móviles */
         @media (max-width: 768px) {
-            .main-card {
+            .content-wrapper {
                 padding: 25px 15px;
             }
             .title {
-                font-size: 1.95rem; /* Escalado de 1.3rem */
+                font-size: 1.95rem;
                 margin-bottom: 20px;
             }
             .countdown-row {
@@ -120,12 +134,15 @@
                 gap: 8px;
             }
             .num-box {
-                height: 90px; /* Escalado de 60px */
-                font-size: 1.95rem; /* Escalado de 1.3rem */
+                height: 90px;
+                font-size: 1.95rem;
                 border-radius: 10px;
             }
             .label-box {
-                font-size: 1.2rem; /* Escalado de 0.8rem */
+                font-size: 1.2rem;
+            }
+            .banner-img {
+                max-height: 120px;
             }
         }
     </style>
@@ -133,28 +150,33 @@
 <body>
 
     <div class="main-card">
-        <h1 class="title">Días para la Jornada Electoral</h1>
+        <!-- Banner superior colocado de manera exacta -->
+        <img src="banner.png" alt="Banner Proceso Electoral" class="banner-img">
         
-        <div class="countdown-row">
-            <!-- Ficha de Días (Tema Fucsia) -->
-            <div class="time-card">
-                <div class="num-box fuchsia-theme" id="days-val">00</div>
-                <div class="label-box">Días</div>
-            </div>
-            <!-- Ficha de Horas (Tema Blanco) -->
-            <div class="time-card">
-                <div class="num-box white-theme" id="hours-val">00</div>
-                <div class="label-box">Horas</div>
-            </div>
-            <!-- Ficha de Minutos (Tema Blanco) -->
-            <div class="time-card">
-                <div class="num-box white-theme" id="minutes-val">00</div>
-                <div class="label-box">Minutos</div>
-            </div>
-            <!-- Ficha de Segundos (Tema Blanco) -->
-            <div class="time-card">
-                <div class="num-box white-theme" id="seconds-val">00</div>
-                <div class="label-box">Segundos</div>
+        <div class="content-wrapper">
+            <h1 class="title">Días para la Jornada Electoral</h1>
+            
+            <div class="countdown-row">
+                <!-- Ficha de Días (Tema Fucsia) -->
+                <div class="time-card">
+                    <div class="num-box fuchsia-theme" id="days-val">00</div>
+                    <div class="label-box">Días</div>
+                </div>
+                <!-- Ficha de Horas (Tema Blanco) -->
+                <div class="time-card">
+                    <div class="num-box white-theme" id="hours-val">00</div>
+                    <div class="label-box">Horas</div>
+                </div>
+                <!-- Ficha de Minutos (Tema Blanco) -->
+                <div class="time-card">
+                    <div class="num-box white-theme" id="minutes-val">00</div>
+                    <div class="label-box">Minutos</div>
+                </div>
+                <!-- Ficha de Segundos (Tema Blanco) -->
+                <div class="time-card">
+                    <div class="num-box white-theme" id="seconds-val">00</div>
+                    <div class="label-box">Segundos</div>
+                </div>
             </div>
         </div>
     </div>
@@ -180,7 +202,7 @@
 
                 if (difference < 0) {
                     clearInterval(updateCountdown);
-                    document.querySelector(".main-card").innerHTML = 
+                    document.querySelector(".content-wrapper").innerHTML = 
                         "<h1 class='title'>La Jornada Electoral ha comenzado</h1>";
                     return;
                 }
