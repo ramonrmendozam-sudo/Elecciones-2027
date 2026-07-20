@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Días para la Jornada Electoral</title>
     <style>
-        /* Desactivar scroll y ajustar de manera estricta al contenedor de Tableau */
+        /* Desactivar scroll y ajustar al contenedor de Tableau */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden; /* Evita cualquier scrollbar en el mosaico */
+            overflow: hidden;
             box-sizing: border-box;
             background-color: #ffffff;
         }
@@ -27,26 +27,27 @@
             justify-content: center;
         }
 
-        /* Contenedor flexible adaptable al 100% del mosaico */
+        /* Contenedor flexible con zoom fijo al 150% (1.5) */
         .main-card {
             background: #ffffff;
             width: 100%;
             height: 100%;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centrado vertical estricto */
-            align-items: center;     /* Centrado horizontal estricto */
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            padding: 10px 15px;      /* Espaciado compacto de seguridad */
+            padding: 10px 15px;
+            zoom: 1.5; /* Fija el zoom al 150% */
         }
 
         /* Título con tamaño de fuente dinámico y margen reducido */
         .title {
             color: #002d62;
-            font-size: clamp(1.1rem, 4vw, 2.2rem); /* Se adapta al ancho disponible */
+            font-size: clamp(1.1rem, 4vw, 2.2rem);
             font-weight: 700;
             margin-top: 0;
-            margin-bottom: 4%; /* Margen dinámico basado en el alto */
+            margin-bottom: 4%;
             letter-spacing: -0.5px;
             line-height: 1.2;
             width: 100%;
@@ -57,17 +58,17 @@
             display: flex;
             justify-content: center;
             width: 100%;
-            max-width: 600px; /* Evita que crezca desproporcionadamente en pantallas enormes */
-            gap: 2.5%;        /* Separación proporcional entre tarjetas */
+            max-width: 600px;
+            gap: 2.5%;
         }
 
-        /* Fichas contenedoras sin medidas rígidas */
+        /* Fichas contenedoras */
         .time-card {
             background: linear-gradient(to bottom, #ffffff 0%, #e9ecef 100%);
             border-radius: 12px;
-            flex: 1;          /* Distribución equitativa del espacio */
-            max-width: 120px; /* Límite de expansión */
-            min-width: 50px;  /* Límite de reducción */
+            flex: 1;
+            max-width: 120px;
+            min-width: 50px;
             padding: 6px;
             display: flex;
             flex-direction: column;
@@ -77,13 +78,13 @@
 
         /* Caja de números fluida con proporción constante */
         .num-box {
-            aspect-ratio: 1 / 0.85; /* Mantiene la proporción alto/ancho de forma automática */
+            aspect-ratio: 1 / 0.85;
             width: 100%;
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.2rem, 5vw, 2.8rem); /* Número adaptable */
+            font-size: clamp(1.2rem, 5vw, 2.8rem);
             font-weight: 700;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
@@ -102,11 +103,11 @@
 
         /* Etiquetas inferiores auto-escalables */
         .label-box {
-            font-size: clamp(0.7rem, 2.3vw, 1.2rem); /* Texto adaptable */
+            font-size: clamp(0.7rem, 2.3vw, 1.2rem);
             font-weight: 600;
             color: #002d62;
             text-align: center;
-            white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+            white-space: nowrap;
         }
     </style>
 </head>
