@@ -2,10 +2,11 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Metaetiqueta que prohíbe el zoom del usuario en pantallas táctiles -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Días para la Jornada Electoral</title>
     <style>
-        /* Desactivar scroll y ajustar al contenedor de Tableau */
+        /* Desactivar scroll y bloquear gestos táctiles de zoom */
         html, body {
             margin: 0;
             padding: 0;
@@ -14,6 +15,7 @@
             overflow: hidden;
             box-sizing: border-box;
             background-color: #ffffff;
+            touch-action: none; /* Desactiva pellizcar para hacer zoom en pantallas táctiles */
         }
 
         *, *:before, *:after {
@@ -27,7 +29,7 @@
             justify-content: center;
         }
 
-        /* Contenedor flexible con zoom fijo al 150% (1.5) */
+        /* Contenedor flexible con zoom fijo al 150% */
         .main-card {
             background: #ffffff;
             width: 100%;
@@ -38,10 +40,10 @@
             align-items: center;
             text-align: center;
             padding: 10px 15px;
-            zoom: 1.5; /* Fija el zoom al 150% */
+            zoom: 1.5; /* Escala interna fija al 150% */
         }
 
-        /* Título con tamaño de fuente dinámico y margen reducido */
+        /* Título con tamaño de fuente dinámico */
         .title {
             color: #002d62;
             font-size: clamp(1.1rem, 4vw, 2.2rem);
@@ -53,7 +55,7 @@
             width: 100%;
         }
 
-        /* Fila de tarjetas adaptable al contenedor */
+        /* Fila de tarjetas adaptable */
         .countdown-row {
             display: flex;
             justify-content: center;
@@ -76,7 +78,7 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
         }
 
-        /* Caja de números fluida con proporción constante */
+        /* Caja de números fluida */
         .num-box {
             aspect-ratio: 1 / 0.85;
             width: 100%;
@@ -101,7 +103,7 @@
             color: #c2006d;
         }
 
-        /* Etiquetas inferiores auto-escalables */
+        /* Etiquetas inferiores */
         .label-box {
             font-size: clamp(0.7rem, 2.3vw, 1.2rem);
             font-weight: 600;
@@ -141,8 +143,39 @@
     </div>
 
     <script>
+        // --- BLOQUEO DE ZOOM DEL NAVEGADOR ---
+        
+        // 1. Bloquear zoom al usar Ctrl + Rueda del ratón
+        document.addEventListener('wheel', function(event) {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+
+        // 2. Bloquear zoom con atajos de teclado (Ctrl + '+', Ctrl + '-', Ctrl + '0')
+        document.addEventListener('keydown', function(event) {
+            if (event.ctrlKey && (
+                event.key === '=' || 
+                event.key === '-' || 
+                event.key === '+' || 
+                event.key === '0' || 
+                event.keyCode === 187 || 
+                event.keyCode === 189 || 
+                event.keyCode === 48 ||
+                event.keyCode === 107 ||
+                event.keyCode === 109
+            )) {
+                event.preventDefault();
+            }
+        });
+
+        // 3. Bloquear gestos de zoom táctil (Pinch-to-zoom) en Mac/Windows Trackpads
+        document.addEventListener('gesturestart', function(event) {
+            event.preventDefault();
+        });
+
+        // --- LÓGICA DE LA CUENTA REGRESIVA ---
         (function() {
-            // Fecha objetivo: 6 de junio de 2027 a las 08:00 AM
             const targetDate = new Date("June 6, 2027 08:00:00").getTime();
 
             const updateCountdown = setInterval(function() {
