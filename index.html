@@ -25,27 +25,29 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 10px;
         }
 
-        /* Contenedor principal - ampliado para alojar tarjetas más grandes */
+        /* Contenedor principal expandido al 100% de la pantalla */
         .main-card {
             background: #ffffff;
-            border-radius: 24px;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
-            padding: 45px 50px;
-            max-width: 800px; /* Escalado para el nuevo tamaño */
             width: 100%;
+            height: 100vh; /* Ocupa todo el alto de la ventana */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centra el contenido verticalmente */
+            align-items: center;     /* Centra el contenido horizontalmente */
             text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
         }
 
-        /* Título aumentado un 50% (de 1.8rem a 2.7rem) */
+        /* Título adaptado para pantalla completa */
         .title {
             color: #002d62;
-            font-size: 2.7rem;
+            font-size: 3rem; /* Ligeramente más grande para formato completo */
             font-weight: 700;
             margin-top: 0;
-            margin-bottom: 35px;
+            margin-bottom: 50px; /* Mayor separación vertical */
             letter-spacing: -0.5px;
         }
 
@@ -53,29 +55,29 @@
         .countdown-row {
             display: flex;
             justify-content: center;
-            gap: 16px;
+            gap: 20px; /* Incrementado para pantallas grandes */
         }
 
-        /* Fichas contenedoras - escaladas en tamaño */
+        /* Fichas contenedoras */
         .time-card {
             background: linear-gradient(to bottom, #ffffff 0%, #e9ecef 100%);
             border-radius: 24px;
-            width: 165px; /* Escalado de 115px a 165px */
-            padding: 12px;
+            width: 175px; /* Ajuste proporcional para pantalla completa */
+            padding: 14px;
             display: flex;
             flex-direction: column;
             gap: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
         }
 
-        /* Caja interna de números aumentada un 50% en tamaño de texto (de 2.3rem a 3.45rem) */
+        /* Caja interna de números */
         .num-box {
-            height: 125px; /* Escalado de 85px a 125px */
+            height: 130px; /* Ajuste de altura */
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3.45rem;
+            font-size: 3.6rem; /* Ajuste visual */
             font-weight: 700;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
         }
@@ -92,23 +94,23 @@
             color: #c2006d;
         }
 
-        /* Etiquetas inferiores aumentadas un 50% (de 1.1rem a 1.65rem) */
+        /* Etiquetas inferiores */
         .label-box {
-            font-size: 1.65rem;
+            font-size: 1.7rem; /* Escalado visual */
             font-weight: 600;
             color: #002d62;
             padding-bottom: 6px;
             text-align: center;
         }
 
-        /* Responsividad adaptada para pantallas medianas y móviles */
+        /* Responsividad adaptada para pantallas móviles sin perder el centrado */
         @media (max-width: 768px) {
             .main-card {
-                padding: 25px 15px;
+                padding: 15px 10px;
             }
             .title {
-                font-size: 1.95rem; /* Escalado de 1.3rem */
-                margin-bottom: 20px;
+                font-size: 1.95rem;
+                margin-bottom: 30px;
             }
             .countdown-row {
                 gap: 8px;
@@ -120,12 +122,12 @@
                 gap: 8px;
             }
             .num-box {
-                height: 90px; /* Escalado de 60px */
-                font-size: 1.95rem; /* Escalado de 1.3rem */
+                height: 90px;
+                font-size: 1.95rem;
                 border-radius: 10px;
             }
             .label-box {
-                font-size: 1.2rem; /* Escalado de 0.8rem */
+                font-size: 1.2rem;
             }
         }
     </style>
