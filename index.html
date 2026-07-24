@@ -55,12 +55,12 @@
             width: 100%;
         }
 
-        /* --- NUEVO ESTILO PARA EL SUBTÍTULO DE FECHA --- */
+        /* --- ESTILO PARA EL SUBTÍTULO DE FECHA (EN NEGRITAS) --- */
         .subtitle {
-            color: #002d62; /* Mismo azul institucional */
-            font-size: clamp(1rem, 3vw, 1.5rem); /* Tamaño responsivo un poco más pequeño que el título */
-            font-weight: 600;
-            margin-top: 20px; /* Espacio para separar del contador */
+            color: #002d62;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            font-weight: 700; /* CAMBIADO A 700 PARA NEGRITAS */
+            margin-top: 20px;
             margin-bottom: 0;
             letter-spacing: -0.3px;
         }
@@ -151,7 +151,7 @@
             </div>
         </div>
 
-        <!-- NUEVO ELEMENTO: LA FECHA -->
+        <!-- LA FECHA EN NEGRITAS -->
         <p class="subtitle">07 de junio de 2027</p>
 
     </div>
@@ -190,7 +190,6 @@
 
         // --- LÓGICA DE LA CUENTA REGRESIVA ---
         (function() {
-            // SE ACTUALIZÓ LA FECHA AL 7 DE JUNIO PARA COINCIDIR CON EL TEXTO
             const targetDate = new Date("June 7, 2027 08:00:00").getTime();
 
             const updateCountdown = setInterval(function() {
