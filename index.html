@@ -55,6 +55,16 @@
             width: 100%;
         }
 
+        /* --- NUEVO ESTILO PARA EL SUBTÍTULO DE FECHA --- */
+        .subtitle {
+            color: #002d62; /* Mismo azul institucional */
+            font-size: clamp(1rem, 3vw, 1.5rem); /* Tamaño responsivo un poco más pequeño que el título */
+            font-weight: 600;
+            margin-top: 20px; /* Espacio para separar del contador */
+            margin-bottom: 0;
+            letter-spacing: -0.3px;
+        }
+
         /* Fila de tarjetas adaptable */
         .countdown-row {
             display: flex;
@@ -91,16 +101,16 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         }
 
-        /* Estilo fucsia (tarjeta de Días) - COLOR CAMBIADO AQUÍ */
+        /* Estilo fucsia (tarjeta de Días) */
         .fuchsia-theme {
-            background-color: #d5007f; /* Nuevo color */
+            background-color: #d5007f;
             color: #ffffff;
         }
 
-        /* Estilo blanco con texto fucsia - COLOR CAMBIADO AQUÍ */
+        /* Estilo blanco con texto fucsia */
         .white-theme {
             background-color: #ffffff;
-            color: #d5007f; /* Nuevo color para el texto */
+            color: #d5007f;
         }
 
         /* Etiquetas inferiores */
@@ -140,6 +150,10 @@
                 <div class="label-box">Segundos</div>
             </div>
         </div>
+
+        <!-- NUEVO ELEMENTO: LA FECHA -->
+        <p class="subtitle">07 de junio de 2027</p>
+
     </div>
 
     <script>
@@ -176,7 +190,8 @@
 
         // --- LÓGICA DE LA CUENTA REGRESIVA ---
         (function() {
-            const targetDate = new Date("June 6, 2027 08:00:00").getTime();
+            // SE ACTUALIZÓ LA FECHA AL 7 DE JUNIO PARA COINCIDIR CON EL TEXTO
+            const targetDate = new Date("June 7, 2027 08:00:00").getTime();
 
             const updateCountdown = setInterval(function() {
                 const now = new Date().getTime();
