@@ -55,16 +55,6 @@
             width: 100%;
         }
 
-        /* --- ESTILO PARA EL SUBTÍTULO DE FECHA (EN NEGRITAS) --- */
-        .subtitle {
-            color: #002d62;
-            font-size: clamp(1rem, 3vw, 1.5rem);
-            font-weight: 700; /* CAMBIADO A 700 PARA NEGRITAS */
-            margin-top: 20px;
-            margin-bottom: 0;
-            letter-spacing: -0.3px;
-        }
-
         /* Fila de tarjetas adaptable */
         .countdown-row {
             display: flex;
@@ -76,50 +66,127 @@
 
         /* Fichas contenedoras */
         .time-card {
-            background: linear-gradient(to bottom, #ffffff 0%, #e9ecef 100%);
+            background-color: #ffffff;
             border-radius: 12px;
             flex: 1;
             max-width: 120px;
             min-width: 50px;
-            padding: 6px;
             display: flex;
             flex-direction: column;
-            gap: 6px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+            overflow: visible; /* Permite que la flecha del fucsia sobresalga */
+            position: relative;
+            border: 1px solid #f1f3f5;
         }
 
-        /* Caja de números fluida */
-        .num-box {
-            aspect-ratio: 1 / 0.85;
-            width: 100%;
-            border-radius: 8px;
+        /* --- CABECERAS DE LAS TARJETAS (NUEVO) --- */
+        .card-header {
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.2rem, 5vw, 2.8rem);
-            font-weight: 700;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            border-radius: 11px 11px 0 0;
+            position: relative;
         }
 
-        /* Estilo fucsia (tarjeta de Días) */
-        .fuchsia-theme {
+        /* Cabecera fucsia */
+        .card-header.fuchsia-header {
             background-color: #d5007f;
             color: #ffffff;
         }
 
-        /* Estilo blanco con texto fucsia */
-        .white-theme {
-            background-color: #ffffff;
-            color: #d5007f;
+        /* Flecha indicadora hacia abajo de la primera tarjeta */
+        .card-header.fuchsia-header::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #d5007f;
+            z-index: 10;
         }
 
-        /* Etiquetas inferiores */
+        /* Cabecera blanca/gris */
+        .card-header.white-header {
+            background-color: #f8f6fc;
+            color: #002d62;
+            border-bottom: 1px solid #ededf5;
+        }
+
+        /* --- CUERPO DE LAS TARJETAS (NUEVO) --- */
+        .card-body {
+            padding: 12px 6px 10px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            flex-grow: 1;
+        }
+
+        /* Caja de números adaptada */
+        .num-box {
+            font-size: clamp(1.6rem, 5vw, 2.8rem);
+            font-weight: 700;
+            color: #d5007f;
+            line-height: 1.1;
+            margin-bottom: 6px;
+        }
+
+        /* Etiquetas inferiores en mayúsculas */
         .label-box {
-            font-size: clamp(0.7rem, 2.3vw, 1.2rem);
-            font-weight: 600;
+            font-size: clamp(0.65rem, 1.8vw, 0.95rem);
+            font-weight: 700;
             color: #002d62;
             text-align: center;
             white-space: nowrap;
+            text-transform: uppercase; /* Convierte a mayúsculas como en la imagen */
+            margin-bottom: 10px;
+        }
+
+        /* Línea indicadora inferior (fucsia) */
+        .card-line {
+            width: 16px;
+            height: 2.5px;
+            background-color: #d5007f;
+            border-radius: 2px;
+        }
+
+        /* --- ESTILOS DE LA PLACA DE LA FECHA (PILL BADGE) --- */
+        .date-badge-pill {
+            background-color: #f3effa;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 20px 6px 6px;
+            gap: 12px;
+            margin-top: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .badge-icon-circle {
+            background-color: #d5007f;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge-text {
+            color: #002d62;
+            font-size: clamp(0.75rem, 2vw, 1.05rem);
+            font-weight: 600;
+            letter-spacing: -0.2px;
+        }
+
+        .badge-highlight {
+            color: #d5007f;
+            font-weight: 700;
         }
     </style>
 </head>
@@ -129,30 +196,88 @@
         <h1 class="title">Días para la Jornada Electoral</h1>
         
         <div class="countdown-row">
-            <!-- Ficha de Días (Tema Fucsia) -->
+            <!-- Ficha de Días (Tema Fucsia con Icono de Calendario) -->
             <div class="time-card">
-                <div class="num-box fuchsia-theme" id="days-val">00</div>
-                <div class="label-box">Días</div>
+                <div class="card-header fuchsia-header">
+                    <!-- Icono de calendario blanco -->
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"></path>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <div class="num-box" id="days-val">00</div>
+                    <div class="label-box">Días</div>
+                    <div class="card-line"></div>
+                </div>
             </div>
-            <!-- Ficha de Horas (Tema Blanco) -->
+
+            <!-- Ficha de Horas (Tema Blanco con Icono de Reloj) -->
             <div class="time-card">
-                <div class="num-box white-theme" id="hours-val">00</div>
-                <div class="label-box">Horas</div>
+                <div class="card-header white-header">
+                    <!-- Icono de reloj azul oscuro -->
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#002d62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <div class="num-box" id="hours-val">00</div>
+                    <div class="label-box">Horas</div>
+                    <div class="card-line"></div>
+                </div>
             </div>
-            <!-- Ficha de Minutos (Tema Blanco) -->
+
+            <!-- Ficha de Minutos (Tema Blanco con Icono de Cronómetro) -->
             <div class="time-card">
-                <div class="num-box white-theme" id="minutes-val">00</div>
-                <div class="label-box">Minutos</div>
+                <div class="card-header white-header">
+                    <!-- Icono de cronómetro azul oscuro -->
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#002d62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="13" r="8"></circle>
+                        <path d="M12 5V2M9 2h6M12 9v4l3 3"></path>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <div class="num-box" id="minutes-val">00</div>
+                    <div class="label-box">Minutos</div>
+                    <div class="card-line"></div>
+                </div>
             </div>
-            <!-- Ficha de Segundos (Tema Blanco) -->
+
+            <!-- Ficha de Segundos (Tema Blanco con Icono de Cronómetro) -->
             <div class="time-card">
-                <div class="num-box white-theme" id="seconds-val">00</div>
-                <div class="label-box">Segundos</div>
+                <div class="card-header white-header">
+                    <!-- Icono de cronómetro azul oscuro -->
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#002d62" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="13" r="8"></circle>
+                        <path d="M12 5V2M9 2h6M12 9v4l3 3"></path>
+                    </svg>
+                </div>
+                <div class="card-body">
+                    <div class="num-box" id="seconds-val">00</div>
+                    <div class="label-box">Segundos</div>
+                    <div class="card-line"></div>
+                </div>
             </div>
         </div>
 
-        <!-- LA FECHA EN NEGRITAS -->
-        <p class="subtitle">07 de junio de 2027</p>
+        <!-- PLACA DE FECHA -->
+        <div class="date-badge-pill">
+            <div class="badge-icon-circle">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+            </div>
+            <div class="badge-text">
+                Fecha de la Jornada Electoral: <span class="badge-highlight">07 de junio de 2027</span>
+            </div>
+        </div>
 
     </div>
 
