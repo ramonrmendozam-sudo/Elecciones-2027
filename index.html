@@ -161,45 +161,72 @@
             border-radius: 2px;
         }
 
-        /* --- PLACA DE LA FECHA ADAPTABLE (PILL BADGE) --- */
+        /* --- NUEVOS ESTILOS DE LA PLACA DE TRES SECCIONES (TRIPLE PILL BADGE) --- */
         .date-badge-pill {
             background-color: #f3effa;
             border-radius: 50px;
             display: inline-flex;
             align-items: center;
-            padding: 4px 14px 4px 4px;
-            gap: 8px;
+            padding: 6px 16px;
+            gap: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-            max-width: 95%; /* Evita desbordamiento horizontal en mosaicos delgados */
+            max-width: 98%; /* Evita desbordamiento horizontal en mosaicos delgados */
         }
 
+        /* Secciones internas del pill (Fecha y Hora) */
+        .pill-section {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Círculo contenedor de icono izquierdo */
         .badge-icon-circle {
-            background-color: #d5007f;
-            width: clamp(20px, 6vh, 28px);
-            height: clamp(20px, 6vh, 28px);
+            background-color: #d5007f; /* Fucsia */
+            width: clamp(20px, 6vh, 26px);
+            height: clamp(20px, 6vh, 26px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
         }
-
         .badge-icon-circle svg {
             height: 50%;
             width: auto;
         }
 
-        .badge-text {
+        /* Iconos delineados sin círculo de fondo */
+        .outline-icon {
+            width: clamp(16px, 5vh, 22px);
+            height: clamp(16px, 5vh, 22px);
+            stroke: #511482; /* Color morado oscuro de la imagen */
+            flex-shrink: 0;
+        }
+
+        /* Texto de título "Fecha y hora de la jornada" */
+        .pill-label-title {
             color: #002d62;
-            font-size: clamp(0.6rem, 2vw, 0.95rem);
-            font-weight: 600;
-            letter-spacing: -0.2px;
+            font-size: clamp(0.6rem, 1.8vw, 0.9rem);
+            font-weight: 700;
             white-space: nowrap;
         }
 
-        .badge-highlight {
+        /* Valores destacados en fucsia */
+        .pill-value-text {
             color: #d5007f;
+            font-size: clamp(0.65rem, 1.8vw, 0.95rem);
             font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* Divisores verticales */
+        .pill-divider {
+            width: 1px;
+            height: clamp(16px, 5vh, 26px);
+            background-color: #cbd5e1;
+            opacity: 0.8;
+            flex-shrink: 0;
         }
     </style>
 </head>
@@ -275,18 +302,45 @@
             </div>
         </div>
 
-        <!-- PLACA DE FECHA ADAPTABLE -->
+        <!-- PLACA DE FECHA TRIPLE (DISEÑO SOLICITADO) -->
         <div class="date-badge-pill">
-            <div class="badge-icon-circle">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Sección 1: Identificador con fondo fucsia -->
+            <div class="pill-section">
+                <div class="badge-icon-circle">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                        <line x1="16" y1="2" x2="16" y2="6"></line>
+                        <line x1="8" y1="2" x2="8" y2="6"></line>
+                        <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </div>
+                <span class="pill-label-title">Fecha y hora de la jornada</span>
+            </div>
+
+            <!-- Separador Vertical 1 -->
+            <div class="pill-divider"></div>
+
+            <!-- Sección 2: Fecha con icono delineado morado -->
+            <div class="pill-section">
+                <svg class="outline-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                     <line x1="16" y1="2" x2="16" y2="6"></line>
                     <line x1="8" y1="2" x2="8" y2="6"></line>
                     <line x1="3" y1="10" x2="21" y2="10"></line>
                 </svg>
+                <span class="pill-value-text">06 de junio de 2027</span>
             </div>
-            <div class="badge-text">
-                Fecha de la Jornada Electoral: <span class="badge-highlight">07 de junio de 2027</span>
+
+            <!-- Separador Vertical 2 -->
+            <div class="pill-divider"></div>
+
+            <!-- Sección 3: Hora con icono delineado morado -->
+            <div class="pill-section">
+                <svg class="outline-icon" viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span class="pill-value-text">08:00 a.m.</span>
             </div>
         </div>
 
@@ -326,7 +380,8 @@
 
         // --- LÓGICA DE LA CUENTA REGRESIVA ---
         (function() {
-            const targetDate = new Date("June 7, 2027 08:00:00").getTime();
+            // Sincronizado exactamente al 6 de junio de 2027 a las 08:00 AM
+            const targetDate = new Date("June 6, 2027 08:00:00").getTime();
 
             const updateCountdown = setInterval(function() {
                 const now = new Date().getTime();
